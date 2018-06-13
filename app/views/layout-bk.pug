@@ -1,0 +1,223 @@
+doctype html
+
+html(xmlns='http://www.w3.org/1999/xhtml', xml:lang='vi', lang='vi')
+    head
+        if (typeof movie !== 'undefined')
+            meta(property="og:site_name", content="phimcuaban.com")
+            meta(property="og:locale", content="vi_VN")
+            meta(property="og:type", content="video.episode")
+            meta(property="og:url", content="/tv-show-" +  movie.alias + ".html")
+            meta(property="og:title", content=title + '- click vào hình để xem trực tiếp trên facebook.')
+            meta(property="og:image", content='/images/' + movie.victims[0].victimTypeNo + '/' + movie.victims[0].thumb + '.jpg')
+            meta(property="og:video", content="https://coihoathinh.com/player/PCBPlayer_1.3.swf?sl=" + movie.alias + '.html')
+            meta(property="og:video:secure_url", content="https://coihoathinh.com/player/PCBPlayer_1.3.swf?sl=" + movie.alias + '.html')
+            meta(property="og:video:type", content="application/x-shockwave-flash")
+            meta(property="og:video:width", content="487")
+            meta(property="og:video:height", content="244")
+            meta(property="og:description", content=description)
+            meta(property="fb:app_id", content="248143835538397")
+        meta(name="google" value="notranslate")
+        meta(name="viewport", content="width=device-width", initial-scale="1.0", user-scalable="no")
+        meta(name="apple-touch-fullscreen", content="YES")
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        meta(name="author", content="www.phimcuaban.com")
+        meta(name="description", content=description)
+        meta(http-equiv="content-language", content="vi")
+        link(rel="alternate" href="http://www.phimcuaban.com" hreflang="vi-vn")
+        title= title
+        script(type='text/javascript', src='/javascripts/jquery.min.js')
+        script(type='text/javascript', src='/javascripts/jquery.carouFredSel-6.2.1.js')
+        script(type='text/javascript', src='/javascripts/jquery.cookie.js')
+        script(type='text/javascript', src='/player/assets/plugin_v1.1.js')
+        //script(type='text/javascript', src='/javascripts/jquery.lazyimage.js')
+        //script(type='text/javascript', src='/javascripts/device.util_1.0.js')
+        script(type='text/javascript', src='/javascripts/pcb_2.2.js')
+        link(rel='stylesheet', href='/stylesheets/style_2.4.css')
+        script.
+            var device = {
+                getDevice: function () {
+                    var ua = navigator.userAgent;
+                    var $ = {};
+                    if (/mobile/i.test(ua))
+                        $.Mobile = true;
+                    if (/like Mac OS X/.test(ua)) {
+                        $.iOS = /CPU( iPhone)? OS ([0-9\._]+) like Mac OS X/.exec(ua)[2].replace(/_/g, '.');
+                        $.iPhone = /iPhone/.test(ua);
+                        $.iPad = /iPad/.test(ua);
+                    }
+                    if (/Android/.test(ua))
+                        $.Android = /Android ([0-9\.]+)[\);]/.exec(ua)[1];
+                    if (/webOS\//.test(ua))
+                        $.webOS = /webOS\/([0-9\.]+)[\);]/.exec(ua)[1];
+                    if (/(Intel|PPC) Mac OS X/.test(ua))
+                        $.Mac = /(Intel|PPC) Mac OS X ?([0-9\._]*)[\)\;]/.exec(ua)[2].replace(/_/g, '.') || true;
+                    if (/Windows NT/.test(ua))
+                        $.Windows = /Windows NT ([0-9\._]+)[\);]/.exec(ua)[1];
+                    return $;
+                }
+            }
+            var nDomain = location.hostname.replace('m.', '');
+            if(device.getDevice().Mobile && location.hostname.indexOf('m.') == -1) {
+                var path = 'http://m.' + nDomain.replace('www.', '');
+                if (location.pathname != '/') {
+                    path = path + location.pathname;
+                }
+                //location.href = path;
+            } else if(!device.getDevice().Mobile && location.hostname.indexOf('m.') != -1){
+                var path = 'http://' + nDomain;
+                if (location.pathname != '/') {
+                    path = path + location.pathname;
+                }
+                //location.href = path;
+            }
+    body
+        div(id='header' class='horizontal-center-block')
+            div(id='header-top')
+                div(id='search-retrieve-holder')
+                div(id='header-top-left')
+                    a(id='header-logo', href='/')
+                        img(alt='logo.png', src='/images/logo.png')
+                div(id='header-top-center' class='top-menus')
+                    ul(class='top-menu-l1-ul')
+                        li(class='top-menu-l1-li')
+                            a(href='/phim-le.html', class='top-menu-l1-li-a')
+                                img(alt='one-epi-icon.png', src='/images/one-epi-icon.png')
+                                br
+                                h2 Phim Lẻ
+                            ul(class='top-menu-l2-ul')
+                                li(class='arrow-up', id="arrow-up-1")
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.oneEpisodes.captions
+                                        a(class='top-menu-l2-li-a', href='/phim-le-' + menusItem.alias + '.html') #{menusItem.name}
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.oneEpisodes.countries
+                                        a(class='top-menu-l2-li-a', href='/phim-le-' + menusItem.alias+ '.html') #{ menusItem.name }
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.oneEpisodes.categories
+                                        a(class='top-menu-l2-li-a', href='/phim-le-' + menusItem.alias+ '.html') #{ menusItem.name }
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.oneEpisodes.publishYears
+                                        a(class='top-menu-l2-li-a', href='/phim-le-' + menusItem.publishYear+ '.html') #{ menusItem.publishYear }
+                        li(class='top-menu-l1-li')
+                            a(href='/phim-bo.html', class='top-menu-l1-li-a')
+                                img(alt='multi-epi-icon.png', src='/images/multi-epi-icon.png')
+                                br
+                                h2 Phim Bộ
+                            ul(class='top-menu-l2-ul')
+                                li(class='arrow-up', id="arrow-up-2")
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.multiEpisodes.captions
+                                        a(class='top-menu-l2-li-a', href='/phim-bo-' + menusItem.alias + '.html') #{menusItem.name}
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.multiEpisodes.countries
+                                        a(class='top-menu-l2-li-a', href='/phim-bo-' + menusItem.alias+ '.html') #{ menusItem.name }
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.multiEpisodes.categories
+                                        a(class='top-menu-l2-li-a', href='/phim-bo-' + menusItem.alias+ '.html') #{ menusItem.name }
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.multiEpisodes.publishYears
+                                        a(class='top-menu-l2-li-a', href='/phim-bo-' + menusItem.publishYear+ '.html') #{ menusItem.publishYear }
+                        li(class='top-menu-l1-li')
+                            a(href='/phim-xuat-ban-nam-' +  new Date().getFullYear() + '.html', class='top-menu-l1-li-a')
+                                img(alt='schedule-icon.png', src='/images/schedule-icon.png')
+                                br
+                                h2 Phim #{ new Date().getFullYear() }
+                            ul(class='top-menu-l2-ul')
+                                li(class='arrow-up', id="arrow-up-3")
+                                li(class='top-menu-l2-li')
+                                    a(class='top-menu-l2-li-a', href='/phim-le-' + new Date().getFullYear() + '.html')='Phim Lẻ'
+                                    a(class='top-menu-l2-li-a', href='/phim-bo-' + new Date().getFullYear() + '.html')='Phim Bộ'
+                                    each menusItem in menus.newEpisodes.captions
+                                        a(class='top-menu-l2-li-a', href='/phim-' + menusItem.alias + '-' + new Date().getFullYear() + '.html') #{menusItem.name}
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.newEpisodes.countries
+                                        a(class='top-menu-l2-li-a', href='/phim-' +  menusItem.alias + '-' +  new Date().getFullYear() + '.html') #{ menusItem.name }
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.newEpisodes.categories
+                                        a(class='top-menu-l2-li-a', href='/phim-' + menusItem.alias + '-' +  new Date().getFullYear() + '.html') #{menusItem.name}
+
+                        li(class='top-menu-l1-li')
+                            a(href='/tv-show.html', class='top-menu-l1-li-a')
+                                img(alt='tv-show-icon.png', src='/images/tv-show-icon.png')
+                                br
+                                h2='TV Show'
+                            ul(class='top-menu-l2-ul')
+                                li(class='arrow-up', id="arrow-up-4")
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.tvShowEpisodes.countries
+                                        a(class='top-menu-l2-li-a', href='/tv-show-' +  menusItem.alias + '.html') #{ menusItem.name }
+                        li(class='top-menu-l1-li')
+                            a(href='javascript:void(0)', class='top-menu-l1-li-a')
+                                img(alt='more-icon.png', src='/images/more-icon.png')
+                                br
+                                h2='More'
+                            ul(class='top-menu-l2-ul')
+                                li(class='arrow-up', id="arrow-up-5")
+                                li(class='top-menu-l2-li')
+                                    a(class='top-menu-l2-li-a', href='/phim-long-tieng.html')='Phim Lồng Tiếng'
+                                    a(class='top-menu-l2-li-a', href='/phim-thuyet-minh.html')='Phim Thuyết Minh'
+                                    a(class='top-menu-l2-li-a', href='/phim-phu-de.html')='Phim Phụ Đề'
+                                    a(class='top-menu-l2-li-a', href='/top-phim-xem-nhieu.html')='Phim Xem Nhiều'
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.categories
+                                        a(class='top-menu-l2-li-a', href='/phim-' + menusItem.alias+ '.html') #{ menusItem.name }
+                                li(class='top-menu-l2-li')
+                                    each menusItem in menus.countries
+                                        a(class='top-menu-l2-li-a', href='/phim-' + menusItem.alias+ '.html') #{ menusItem.name }
+                                li(class='top-menu-l2-li')
+                                    a(class='top-menu-l2-li-a', href='/phim-xuat-ban-nam-2010.html')='Phim 2017'
+                                    a(class='top-menu-l2-li-a', href='/phim-xuat-ban-nam-2016.html')='Phim 2016'
+                                    a(class='top-menu-l2-li-a', href='/phim-xuat-ban-nam-2015.html')='Phim 2015'
+                                    a(class='top-menu-l2-li-a', href='/phim-xuat-ban-nam-2014.html')='Phim 2014'
+                                    a(class='top-menu-l2-li-a', href='/phim-xuat-ban-nam-2013.html')='Phim 2013'
+                                    a(class='top-menu-l2-li-a', href='/phim-xuat-ban-nam-2012.html')='Phim 2012'
+                                    a(class='top-menu-l2-li-a', href='/phim-xuat-ban-nam-2011.html')='Phim 2011'
+                                    a(class='top-menu-l2-li-a', href='/phim-xuat-ban-nam-2010.html')='Phim 2010'
+
+                div(id='header-top-right')
+                    div(id='search-form')
+                        input(id='search-input', placeholder='Gõ từ khóa cần tìm ...', autocomplete='off')
+                        div(id='clean-text-search') X
+                        div(id='wait-search-icon' class='loader')
+                        button(id='search-button')
+        div(id='content-body' class='horizontal-center-block')
+            block content
+        div(id='footer')
+            div(id='inner-footer', class='horizontal-center-block', style='line-height: 50px;')
+                a(href='/sitemap.xml', style='font-weight: bold;')='SiteMap'
+            div(id='copy-right', class='horizontal-center-block')='© 2016 by phimcuaban.com - phiên bản thử nghiệm. WEBSITE chia sẻ miễn phí giữa các thành viên.'
+        div(id='body-left')
+        div(id='body-right')
+        div(id='tooltip-holder', class='shadow')
+            div(id='tooltip-arrow')
+            div(id='tooltip-content')
+        style.
+            #body-left, #body-right {
+                position: fixed;
+                top: 0;
+                width: 160px;
+                height: 100%;
+                #background-image: url('/images/christmas_tree_animation.gif');
+                background-size: 100%;
+                background-repeat: no-repeat;
+                margin: 0px 10px;
+                background-position-y: 100%;
+            }
+
+            #body-right {
+                right: 0px;
+            }
+        script.
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-87999389-1', 'auto');
+            ga('send', 'pageview');

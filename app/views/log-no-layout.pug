@@ -1,0 +1,22 @@
+ul
+	each key in Object.keys(logContent)
+		li
+			label(style='color:#ff5722')  #{ key }
+				ul
+					each logItemChild in logContent[key]
+						li
+							label(style='color:#ffc107') #{ logItemChild.logDate }
+							label  --
+							label(style='color:#ff5722')  #{ logItemChild.message }
+							label  --
+							label  #{ logItemChild.source }
+style.
+		body {
+			background: #0f0e11;
+		}
+		li {
+			font-size: 12px;
+			list-style-type: decimal;
+			color: #b0afad;
+			line-height: 20px;
+		}

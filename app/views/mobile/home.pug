@@ -1,0 +1,221 @@
+extends layout
+block content
+    ul(id='list-block-item')
+        li(class='block-item')
+            h2(class='block-item-header')
+                label Phim Mới Cập Nhật
+            div(class='image-zoom')
+                each movieItem in sliderMovies
+                    div(class='movie-item')
+                        div(class='movie-item-top')
+                            div(class='movie-item-top-left')
+                                a(href='/xem-phim-' + movieItem.alias + '.html')
+                                    img(class='lazy-image radius-5px', src=mediaConstants.media.host + '/images/' + movieItem.victims[0].victimTypeNo + '/' + movieItem.victims[0].thumb + '.jpg', alt=movieItem.name1 + ' - ' + movieItem.name2)
+                            div(class='movie-item-top-right')
+                                div(class='movie-item-titles')
+                                    a(href='/xem-phim-' + movieItem.alias + '.html', class='name1-title')
+                                        h3 #{ movieItem.name1 }
+                                    a(href='/xem-phim-' + movieItem.alias + '.html', class='name2-title')
+                                        h3 #{ movieItem.name2 }
+                                div(class='movie-item-status')
+                                    if movieItem.victims[0].currentEpisode > 0
+                                        label Tập  #{ movieItem.victims[0].currentEpisode }
+                                        if movieItem.victims[0].totalEpisode > 0
+                                            label / #{ movieItem.victims[0].totalEpisode }
+                                    label  #{ movieItem.victims[0].quality }
+                                    if movieItem.victims[0].hasSub == 1
+                                        label(class='top-menu-l2-li-a')='-ViệtSub'
+                                    if movieItem.victims[0].hasDubbing == 1
+                                        label(class='top-menu-l2-li-a')='-Lồng Tiếng'
+                                    if movieItem.victims[0].hasTrans == 1
+                                        label(class='top-menu-l2-li-a')='-TM'
+                        div(class='movie-item-bottom')
+                            div(class='pre-view-holder')
+                            div(class='movie-item-button')
+                                a(class="watch-movie-bt", href='/xem-phim-' + movieItem.alias + '.html') Xem Phim
+                            div(class='movie-item-user') Lượt xem:
+                                label(class='pcb-num')  #{ movieItem.victims[0].viewed }
+                                label  | Đánh giá:
+                                label(class='pcb-num')  #{ Math.round(movieItem.victims[0].rating * 10) / 10 }
+        li(class='block-item')
+            h2(class='block-item-header')
+                label Phim Chiếu Rạp
+            div(class='image-zoom')
+                each movieItem in cinemaMovies
+                    div(class='movie-item')
+                        div(class='movie-item-top')
+                            div(class='movie-item-top-left')
+                                a(href='/xem-phim-' + movieItem.alias + '.html')
+                                    img(class='lazy-image radius-5px', src=mediaConstants.media.host + '/images/' + movieItem.victims[0].victimTypeNo + '/' + movieItem.victims[0].thumb + '.jpg', alt=movieItem.name1 + ' - ' + movieItem.name2)
+                            div(class='movie-item-top-right')
+                                div(class='movie-item-titles')
+                                    a(href='/xem-phim-' + movieItem.alias + '.html', class='name1-title')
+                                        h3 #{ movieItem.name1 }
+                                    a(href='/xem-phim-' + movieItem.alias + '.html', class='name2-title')
+                                        h3 #{ movieItem.name2 }
+                                div(class='movie-item-status')
+                                    if movieItem.victims[0].currentEpisode > 0
+                                        label Tập  #{ movieItem.victims[0].currentEpisode }
+                                        if movieItem.victims[0].totalEpisode > 0
+                                            label / #{ movieItem.victims[0].totalEpisode }
+                                    label  #{ movieItem.victims[0].quality }
+                                    if movieItem.victims[0].hasSub == 1
+                                        label(class='top-menu-l2-li-a')='-ViệtSub'
+                                    if movieItem.victims[0].hasDubbing == 1
+                                        label(class='top-menu-l2-li-a')='-Lồng Tiếng'
+                                    if movieItem.victims[0].hasTrans == 1
+                                        label(class='top-menu-l2-li-a')='-TM'
+                        div(class='movie-item-bottom')
+                            div(class='pre-view-holder')
+                            div(class='movie-item-button')
+                                a(class="watch-movie-bt", href='/xem-phim-' + movieItem.alias + '.html') Xem Phim
+                            div(class='movie-item-user') Lượt xem:
+                                label(class='pcb-num')  #{ movieItem.victims[0].viewed }
+                                label  | Đánh giá:
+                                label(class='pcb-num')  #{ Math.round(movieItem.victims[0].rating * 10) / 10 }
+        li(class='block-item')
+            h2(class='block-item-header')
+                label Phim Lẻ Nổi Bật
+            div(class='image-zoom')
+                each movieItem in oneEpisodeHostMovies
+                    div(class='movie-item')
+                        div(class='movie-item-top')
+                            div(class='movie-item-top-left')
+                                a(href='/xem-phim-' + movieItem.alias + '.html')
+                                    img(class='lazy-image radius-5px', src=mediaConstants.media.host + '/images/' + movieItem.victims[0].victimTypeNo + '/' + movieItem.victims[0].thumb + '.jpg', alt=movieItem.name1 + ' - ' + movieItem.name2)
+                            div(class='movie-item-top-right')
+                                div(class='movie-item-titles')
+                                    a(href='/xem-phim-' + movieItem.alias + '.html', class='name1-title')
+                                        h3 #{ movieItem.name1 }
+                                    a(href='/xem-phim-' + movieItem.alias + '.html', class='name2-title')
+                                        h3 #{ movieItem.name2 }
+                                div(class='movie-item-status')
+                                    if movieItem.victims[0].currentEpisode > 0
+                                        label Tập  #{ movieItem.victims[0].currentEpisode }
+                                        if movieItem.victims[0].totalEpisode > 0
+                                            label / #{ movieItem.victims[0].totalEpisode }
+                                    label  #{ movieItem.victims[0].quality }
+                                    if movieItem.victims[0].hasSub == 1
+                                        label(class='top-menu-l2-li-a')='-ViệtSub'
+                                    if movieItem.victims[0].hasDubbing == 1
+                                        label(class='top-menu-l2-li-a')='-Lồng Tiếng'
+                                    if movieItem.victims[0].hasTrans == 1
+                                        label(class='top-menu-l2-li-a')='-TM'
+                        div(class='movie-item-bottom')
+                            div(class='pre-view-holder')
+                            div(class='movie-item-button')
+                                a(class="watch-movie-bt", href='/xem-phim-' + movieItem.alias + '.html') Xem Phim
+                            div(class='movie-item-user') Lượt xem:
+                                label(class='pcb-num')  #{ movieItem.victims[0].viewed }
+                                label  | Đánh giá:
+                                label(class='pcb-num')  #{ Math.round(movieItem.victims[0].rating * 10) / 10 }
+        li(class='block-item')
+            h2(class='block-item-header')
+                label Phim Bộ Nổi Bật
+            div(class='image-zoom')
+                each movieItem in multiEpisodeHostMovies
+                    div(class='movie-item')
+                        div(class='movie-item-top')
+                            div(class='movie-item-top-left')
+                                a(href='/xem-phim-' + movieItem.alias + '.html')
+                                    img(class='lazy-image radius-5px', src=mediaConstants.media.host + '/images/' + movieItem.victims[0].victimTypeNo + '/' + movieItem.victims[0].thumb + '.jpg', alt=movieItem.name1 + ' - ' + movieItem.name2)
+                            div(class='movie-item-top-right')
+                                div(class='movie-item-titles')
+                                    a(href='/xem-phim-' + movieItem.alias + '.html', class='name1-title')
+                                        h3 #{ movieItem.name1 }
+                                    a(href='/xem-phim-' + movieItem.alias + '.html', class='name2-title')
+                                        h3 #{ movieItem.name2 }
+                                div(class='movie-item-status')
+                                    if movieItem.victims[0].currentEpisode > 0
+                                        label Tập  #{ movieItem.victims[0].currentEpisode }
+                                        if movieItem.victims[0].totalEpisode > 0
+                                            label / #{ movieItem.victims[0].totalEpisode }
+                                    label  #{ movieItem.victims[0].quality }
+                                    if movieItem.victims[0].hasSub == 1
+                                        label(class='top-menu-l2-li-a')='-ViệtSub'
+                                    if movieItem.victims[0].hasDubbing == 1
+                                        label(class='top-menu-l2-li-a')='-Lồng Tiếng'
+                                    if movieItem.victims[0].hasTrans == 1
+                                        label(class='top-menu-l2-li-a')='-TM'
+                        div(class='movie-item-bottom')
+                            div(class='pre-view-holder')
+                            div(class='movie-item-button')
+                                a(class="watch-movie-bt", href='/xem-phim-' + movieItem.alias + '.html') Xem Phim
+                            div(class='movie-item-user') Lượt xem:
+                                label(class='pcb-num')  #{ movieItem.victims[0].viewed }
+                                label  | Đánh giá:
+                                label(class='pcb-num')  #{ Math.round(movieItem.victims[0].rating * 10) / 10 }
+        li(class='block-item')
+            h2(class='block-item-header')
+                label Phim Hoạt Hình
+            div(class='image-zoom')
+                each movieItem in cartoonMovies
+                    div(class='movie-item')
+                        div(class='movie-item-top')
+                            div(class='movie-item-top-left')
+                                a(href='/xem-phim-' + movieItem.alias + '.html')
+                                    img(class='lazy-image radius-5px', src=mediaConstants.media.host + '/images/' + movieItem.victims[0].victimTypeNo + '/' + movieItem.victims[0].thumb + '.jpg', alt=movieItem.name1 + ' - ' + movieItem.name2)
+                            div(class='movie-item-top-right')
+                                div(class='movie-item-titles')
+                                    a(href='/xem-phim-' + movieItem.alias + '.html', class='name1-title')
+                                        h3 #{ movieItem.name1 }
+                                    a(href='/xem-phim-' + movieItem.alias + '.html', class='name2-title')
+                                        h3 #{ movieItem.name2 }
+                                div(class='movie-item-status')
+                                    if movieItem.victims[0].currentEpisode > 0
+                                        label Tập  #{ movieItem.victims[0].currentEpisode }
+                                        if movieItem.victims[0].totalEpisode > 0
+                                            label / #{ movieItem.victims[0].totalEpisode }
+                                    label  #{ movieItem.victims[0].quality }
+                                    if movieItem.victims[0].hasSub == 1
+                                        label(class='top-menu-l2-li-a')='-ViệtSub'
+                                    if movieItem.victims[0].hasDubbing == 1
+                                        label(class='top-menu-l2-li-a')='-Lồng Tiếng'
+                                    if movieItem.victims[0].hasTrans == 1
+                                        label(class='top-menu-l2-li-a')='-TM'
+                        div(class='movie-item-bottom')
+                            div(class='pre-view-holder')
+                            div(class='movie-item-button')
+                                a(class="watch-movie-bt", href='/xem-phim-' + movieItem.alias + '.html') Xem Phim
+                            div(class='movie-item-user') Lượt xem:
+                                label(class='pcb-num')  #{ movieItem.victims[0].viewed }
+                                label  | Đánh giá:
+                                label(class='pcb-num')  #{ Math.round(movieItem.victims[0].rating * 10) / 10 }
+        li(class='block-item')
+            h2(class='block-item-header')
+                label TV Show
+            div(class='image-zoom')
+                each movieItem in tvShows
+                    div(class='movie-item')
+                        div(class='movie-item-top')
+                            div(class='movie-item-top-left')
+                                a(href='/xem-phim-' + movieItem.alias + '.html')
+                                    img(class='lazy-image radius-5px', src=mediaConstants.media.host + '/images/' + movieItem.victims[0].victimTypeNo + '/' + movieItem.victims[0].thumb + '.jpg', alt=movieItem.name1 + ' - ' + movieItem.name2)
+                            div(class='movie-item-top-right')
+                                div(class='movie-item-titles')
+                                    a(href='/xem-phim-' + movieItem.alias + '.html', class='name1-title')
+                                        h3 #{ movieItem.name1 }
+                                    a(href='/xem-phim-' + movieItem.alias + '.html', class='name2-title')
+                                        h3 #{ movieItem.name2 }
+                                div(class='movie-item-status')
+                                    if movieItem.victims[0].currentEpisode > 0
+                                        label Tập  #{ movieItem.victims[0].currentEpisode }
+                                        if movieItem.victims[0].totalEpisode > 0
+                                            label / #{ movieItem.victims[0].totalEpisode }
+                                    label  #{ movieItem.victims[0].quality }
+                                    if movieItem.victims[0].hasSub == 1
+                                        label(class='top-menu-l2-li-a')='-ViệtSub'
+                                    if movieItem.victims[0].hasDubbing == 1
+                                        label(class='top-menu-l2-li-a')='-Lồng Tiếng'
+                                    if movieItem.victims[0].hasTrans == 1
+                                        label(class='top-menu-l2-li-a')='-TM'
+                        div(class='movie-item-bottom')
+                            div(class='pre-view-holder')
+                            div(class='movie-item-button')
+                                a(class="watch-movie-bt", href='/xem-phim-' + movieItem.alias + '.html') Xem Phim
+                            div(class='movie-item-user') Lượt xem:
+                                label(class='pcb-num')  #{ movieItem.victims[0].viewed }
+                                label  | Đánh giá:
+                                label(class='pcb-num')  #{ Math.round(movieItem.victims[0].rating * 10) / 10 }
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PCBPlayer</title>
+    <link rel="stylesheet" type="text/css" href='assets/bootstrap/bootstrap.min.css'/>
+    <link rel="stylesheet" type="text/css" href='assets/bootstrap/font-awesome.min.css'/>
+    <link rel="stylesheet" type="text/css" href="css/style-v8.css"/>
+    <style>
+        #videont-container {
+            width: 832px;
+            height: 468px;
+        }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="assets/plugin-v1.js"></script>
+
+    <script type="application/javascript">
+        $(document).ready(function () {
+            initPlayerByUrl("http://localhost:3001/thong-tin-player/tham-tu-lung-danh-conan.html");
+            function initPlayerByUrl(url) {
+                getVideoInfo(url, function (videoInfo) {
+                    videoInfo.url = url;
+                    PCBPlayer('videont-container', 'list-relation', videoInfo,
+                    function(url) {
+                        initPlayerByUrl(url);
+                    },
+                    function() {
+                        getVideoUrl(function(videoUrl){
+                            loadNewVideo(evalUtil(2, videoUrl, videoInfo.key));
+                            togglePlay();
+                        });
+                    });
+                });
+            }
+            function getVideoInfo(url, callback) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (videoInfo) {
+                        callback(videoInfo);
+                    }
+                });
+            }
+        })
+    </script>
+</head>
+<body>
+    <div id="videont-container">
+    </div>
+    <div id="list-relation"></div>
+    <script src="./PCBPlayer.js"></script>
+    <script src="assets/screenfull.js"></script>
+</body>
+</html>

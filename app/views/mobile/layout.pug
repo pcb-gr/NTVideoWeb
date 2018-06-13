@@ -1,0 +1,48 @@
+doctype html
+html(xmlns='http://www.w3.org/1999/xhtml', xml:lang='vi', lang='vi')
+    head
+        if (typeof movie !== 'undefined')
+            meta(property="og:site_name", content="phimcuaban.com")
+            meta(property="og:locale", content="vi_VN")
+            meta(property="og:type", content="video.episode")
+            meta(property="og:url", content="/tv-show-" + movie.alias + ".html")
+            meta(property="og:title", content=title + '- click vào hình để xem trực tiếp trên facebook.')
+            meta(property="og:image", content='/images/' + movie.victims[0].victimTypeNo + '/' + movie.victims[0].thumb + '.jpg')
+            meta(property="og:video", content="https://coihoathinh.com/player/PCBPlayer_1.3.swf?sl=" + movie.alias + '.html')
+            meta(property="og:video:secure_url", content="https://coihoathinh.com/player/PCBPlayer_1.3.swf?sl=" + movie.alias + '.html')
+            meta(property="og:video:type", content="application/x-shockwave-flash")
+            meta(property="og:video:width", content="487")
+            meta(property="og:video:height", content="244")
+            meta(property="og:description", content=description)
+            meta(property="fb:app_id", content="248143835538397")
+        meta(name="google" value="notranslate")
+        meta(name="viewport", content="width=device-width", initial-scale="1.0", user-scalable="no")
+        meta(name="apple-touch-fullscreen", content="YES")
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        meta(name="author", content="www.phimcuaban.com")
+        meta(name="description", content=description)
+        meta(http-equiv="content-language", content="vi")
+        link(rel="alternate" href="http://www.phimcuaban.com" hreflang="vi-vn")
+        title= title
+        script(type='text/javascript', src='/javascripts/jquery.min.js')
+        script(type='text/javascript', src='/javascripts/jquery.carouFredSel-6.2.1.js')
+        script(type='text/javascript', src='/javascripts/jquery.cookie.js')
+        script(type='text/javascript', src='/javascripts/override_util.js')
+        script(type='text/javascript', src='/player/assets/plugin_v1.1.js')
+        script(type='text/javascript', src='/javascripts/mobile/pcb_1.7.js')
+        link(rel='stylesheet', href='/stylesheets/mobile/style_1.1.css')
+    body
+        div(id='main', class='horizontal-center-block')
+            header(id='header')
+                h1(id='logo')
+                    a(href='/')
+                        img(alt='logo' src='/images/logo.png')
+            div(id='page-wrapper')
+                block content
+            footer(id='footer')
+            ul(id='menu' class='fixed-bottom')
+                li Trang chủ
+                li Thể Loại
+                li Phim Lẻ
+                li Phim Bộ
+                li Thuyết Minh

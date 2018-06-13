@@ -1,0 +1,41 @@
+html, body {margin: 0; padding: 0;}
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('BebasNeue-webfont.eot');
+    src: url('BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('BebasNeue-webfont.woff') format('woff'),
+         url('BebasNeue-webfont.ttf') format('truetype'),
+         url('BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.hm-watch * { color:#fff; text-align:center; text-shadow:0 0 5px rgba(57, 177, 46, 0.57); }
+.hm-watch .container {width: auto; margin: 0 auto; overflow: hidden;}
+
+.hm-watch .clock {width:100%; margin:0 auto; padding:30px; border:1px solid #333; color:#fff; }
+
+.hm-watch #Date {font-size:36px;}
+
+.hm-watch ul { width:100%; margin:0 auto; padding:0px; list-style:none; text-align:left; }
+.hm-watch ul li { display:inline-block; font-size:1em; text-align:center; font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; text-shadow:0 0 5px #19B904; }
+
+.hm-watch #point { position:relative; -moz-animation:mymove 1s ease infinite;padding-left:3px; padding-right:2px; }
+.hm-watch #sys-time #point {
+     -webkit-animation:mymove 1s ease infinite;
+}
+@-webkit-keyframes mymove 
+{
+0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
+50% {opacity:0; text-shadow:none; }
+100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }	
+}
+
+
+@-moz-keyframes mymove 
+{
+0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
+50% {opacity:0; text-shadow:none; }
+100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }	
+}

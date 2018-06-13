@@ -1,0 +1,140 @@
+extends layout
+
+block content
+    div(class='list-movies')
+        div(class='navigator')
+            h2
+                a(href='/')='Trang Chủ /'
+            each breadCrumbItem, index in breadcrumb
+                h2
+                    a(href='phim-' + breadCrumbItem.alias.replace(/phim-/g, '') + '.html') #{ breadCrumbItem.title }
+                    label #{(index < breadcrumb.length - 1) ? ',' : ''}
+
+        div(class='image-zoom', id='movie-items-container')
+            each movieItem, index in listMovies
+                div(class='movie-item' + (((index + 1) % 5 == 0 && index != 1) ? ' last-item' : ''))
+                    a(href='/xem-phim-' + movieItem.alias + '.html')
+                        img(class='lazy-image', src=mediaConstants.media.host + '/images/' + movieItem.victims[0].victimTypeNo + '/' +  movieItem.victims[0].thumb  + '.jpg', alt=( movieItem.name1 ) + '-' + (movieItem.name2))
+                    div(class='movie-item-status')
+                        if movieItem.victims[0].currentEpisode > 0
+                            label Tập #{ movieItem.victims[0].currentEpisode }
+                            if movieItem.victims[0].totalEpisode > 0
+                                label /#{ movieItem.victims[0].totalEpisode }
+                        label  #{ movieItem.victims[0].quality }
+                        if movieItem.victims[0].hasSub == 1
+                            a(class='top-menu-l2-li-a')='-ViệtSub'
+                        if  movieItem.victims[0].hasDubbing == 1
+                            a(class='top-menu-l2-li-a')='-Lồng Tiếng'
+                        if  movieItem.victims[0].hasTrans == 1
+                            a(class='top-menu-l2-li-a')='-TM'
+                    div(class='movie-item-user')
+                        label  Lượt xem:
+                        label(class='pcb-num')  #{ movieItem.victims[0].viewed }
+                        label  | Đánh giá:
+                        label(class='pcb-num')  #{ Math.round(movieItem.victims[0].rating * 10) / 10 }
+                    div(class='movie-item-titles')
+                        a(href='/xem-phim-' + movieItem.alias + '.html')
+                            h3 #{ movieItem.name1 }
+                        a(href='/xem-phim-' + movieItem.alias + '.html')
+                            h3 #{ movieItem.name2 }
+                    div(class='pcb-tooltip')
+                        div(class='pcb-tooltip-top')
+                            div Thể Loại:
+                                each category, index in movieItem.categories
+                                    a(href='/phim-' + category.alias + '.html') #{ ((index != 0) ? ', ' : ' ') + category.name}
+                            div Diễn Viên:
+                                each actor, index in movieItem.actors
+                                    a(href='/phim-' + actor.alias + '.html') #{ ((index != 0) ? ', ' : ' ') + actor.name }
+                            div Đạo Diễn:
+                                each director, index in movieItem.directors
+                                    a(href='/phim-' + director.alias + '.html') #{ ((index != 0) ? ', ' : ' ') + director.name }
+                            div Quốc Gia:
+                                each country, index in movieItem.countries
+                                    a(href='/phim-' + country.alias + '.html') #{ ((index != 0) ? ', ' : ' ') + country.name }
+                        div(class='pcb-tooltip-middle')
+                            h3 #{ movieItem.name1 } - #{ movieItem.name2 }
+                            | !{ movieItem.victims[0].description }
+                        div(class='pcb-tooltip-bottom')
+                            a(class="watch-movie-bt", href='/xem-phim-' + movieItem.alias + '.html') Xem Phim
+        div(id='bottom-list')
+            div(id="next-page-content-temp", style="display:none")
+            div(class='view-more radius-200px', style='display:none')
+                a Xem Thêm
+
+        div(id='show-filter-bt', class='right-filter radius-top-bottom-200px shadow')
+            label Lọc Phim
+        div(class='filter-hidden transition-all')
+            ul(class='top-menu-l1-ul')
+                li(class='top-menu-l1-li')
+                    h4='Thể Loại'
+                    ul(class='top-menu-l2-ul')
+                        each filterItem in listFilters.categories
+                            li(class='top-menu-l2-li')
+                                h2
+                                    input(type='checkbox', id='category-id-' + filterItem.categoryId, class='qcata', alias=filterItem.alias)
+                                    label(for='category-id-' + filterItem.categoryId)
+                                    a(class='top-menu-l2-li-a', title=filterItem.name) #{ filterItem.name }
+                li(class='top-menu-l1-li')
+                    h4='Quốc Gia'
+                    ul(class='top-menu-l2-ul')
+                        each filterItem in listFilters.countries
+                            li(class='top-menu-l2-li')
+                                h2
+                                    input(type='checkbox', id='country-id-' + filterItem.countryId, class='qca', alias=filterItem.alias)
+                                    label(for='country-id-' + filterItem.countryId)
+                                    a(class='top-menu-l2-li-a', title=filterItem.name) #{ filterItem.name }
+                li(class='top-menu-l1-li')
+                    h4='Diễn Viên'
+                    input(id='actor-filter-input', class='filter-hidden-input', placeholder='Nhập tên diễn viên cần tìm')
+                    ul(class='top-menu-l2-ul', id='actors-list')
+                        each filterItem in listFilters.actors
+                            li(class='top-menu-l2-li', id=filterItem.alias)
+                                h2
+                                    input(type='checkbox', id='actor-id-' + filterItem.actorId, class='qaa', alias=filterItem.alias)
+                                    label(for='actor-id-' + filterItem.actorId)
+                                    a(class='top-menu-l2-li-a', title=filterItem.name) #{ filterItem.name }
+                    ul(class='top-menu-l2-ul', id='actors-list-ajax', style='display:none')
+                    div(id="actor-selected-holder")
+                li(class='top-menu-l1-li')
+                    h4='Đạo Diễn'
+                    input(id='director-filter-input', class='filter-hidden-input', placeholder='Nhập tên đạo diễn cần tìm')
+                    ul(class='top-menu-l2-ul', id='directors-list')
+                        each filterItem in listFilters.directors
+                            li(class='top-menu-l2-li', id=filterItem.alias)
+                                h2
+                                    input(type='checkbox', id='director-id-' + filterItem.directorId, class='qda', alias=filterItem.alias)
+                                    label(for='director-id-' + filterItem.directorId)
+                                    a(class='top-menu-l2-li-a', title=filterItem.name) #{ filterItem.name }
+                    ul(class='top-menu-l2-ul', id='directors-list-ajax', style='display:none')
+                    div(id="director-selected-holder")
+                li(class='top-menu-l1-li', id='top-menu-l1-li-more')
+                    h4='More'
+                    ul(class='top-menu-l2-ul')
+                        li(class='top-menu-l2-li')
+                            h2
+                                input(type='checkbox', id='for-one-episode', class='qkm', alias='phim-le')
+                                label(for='for-one-episode')
+                                a(class='top-menu-l2-li-a', title='Xem phim lẻ') Phim Lẻ
+                        li(class='top-menu-l2-li')
+                            h2
+                                input(type='checkbox', id='for-multi-episode', class='qkm', alias='phim-bo')
+                                label(for='for-multi-episode')
+                                a(class='top-menu-l2-li-a', title='Xem phim bộ') Phim Bộ
+                        li(class='top-menu-l2-li')
+                            h2
+                                input(type='checkbox', id='for-has-trans', class='qcv', alias='thuyet-minh')
+                                label(for='for-has-trans')
+                                a(class='top-menu-l2-li-a', title='Xem phim thuyết minh') Phim Thuyết Minh
+                        li(class='top-menu-l2-li')
+                            h2
+                                input(type='checkbox', id='for-has-dubbing', class='qcv', alias='long-tieng')
+                                label(for='for-has-dubbing')
+                                a(class='top-menu-l2-li-a', title='Xem phim lồng tiếng') Phim Lồng Tiếng
+                        li(class='top-menu-l2-li')
+                            h2
+                                input(type='checkbox', id='for-has-sub', class='qcv', alias='phu-de')
+                                label(for='for-has-sub')
+                                a(class='top-menu-l2-li-a', title='Xem phim phụ đề') Phim Phụ Đề
+                li(class='filter-buttons top-menu-l1-li')
+                    a(id='filter-bt', class='radius-5px') Lọc Phim
+                    a(id='close-bt', class='radius-5px') Đóng
