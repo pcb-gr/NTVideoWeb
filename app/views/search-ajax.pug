@@ -13,7 +13,7 @@ else
                 each movieItem, index in listMovies
                     div(class='movie-list-item')
                         a(href='/xem-phim-' + movieItem.alias + '.html')
-                            img(src=mediaConstants.media.host + '/images/' +  movieItem.victims[0].victimTypeNo + '/' + movieItem.victims[0].smallImage + '.jpg', alt=movieItem.name1 + ' - ' + movieItem.name2)
+                            img(src=movieItem.victims[0].thumb, alt=movieItem.name1 + ' - ' + movieItem.name2)
                         div(class='movie-item-info')
                             a(href='/xem-phim-' + movieItem.alias + '.html')
                                 h3(class='movie-name-1') #{ movieItem.name1 }

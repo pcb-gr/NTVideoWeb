@@ -2,7 +2,7 @@ div
     each movieItem, index in listMovies
         div(class='movie-item' + (((index + 1) % 5 == 0 && index != 1) ? ' last-item' : ''))
             a(href='/xem-phim-' + movieItem.alias + '.html')
-                img(class='lazy-image', src=mediaConstants.media.host + '/images/' + movieItem.victims[0].victimTypeNo + '/' + movieItem.victims[0].thumb + '.jpg', alt=( movieItem.name1 ) + '-' + (movieItem.name2))
+                img(class='lazy-image', src=movieItem.victims[0].smallImage, alt=( movieItem.name1 ) + '-' + (movieItem.name2))
             div(class='movie-item-status')
                 if movieItem.victims[0].currentEpisode > 0
                     label Tập #{ movieItem.victims[0].currentEpisode }

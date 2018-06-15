@@ -60,6 +60,7 @@ var watchService = {
                 case 0 : victimName = 'PhimBatHu'; break;
                 case 1 : victimName = 'BiLuTv'; break;
                 case 2 : victimName = 'PhimMoi'; break;
+                case 3 : victimName = 'TvHay'; break;
             }
             return data.victims[0].playListHtml;
         }).then(function (data) {
