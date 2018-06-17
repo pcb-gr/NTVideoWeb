@@ -62,23 +62,28 @@ var watchService = {
                 case 2 : victimName = 'PhimMoi'; break;
                 case 3 : victimName = 'TvHay'; break;
             }
-            return data.victims[0].playListHtml;
-        }).then(function (data) {
+            return data;
+        }).then(function (movie) {
             //console.log("findInfoPlayerByMovieAliasAndEpisodeIndex_2:" + data);
-            return resourceUtil['getGroups' + victimName](data).then(function (groups) {
+            return resourceUtil['getGroups' + victimName](movie.victims[0].playListHtml).then(function (groups) {
                 //if (groupIndex >= groups.length) return '404';
                 playerInfo.groups = groups.groupsName;
                 groupsHref = groups.groupsHref;
-                return data;
+                return movie;
             })
-        }).then(function (data) {
-            return resourceUtil['getEpisodes' + victimName](data, groupIndex).then(function (episodes) {
+        }).then(function (movie) {
+            return resourceUtil['getEpisodes' + victimName](movie.victims[0].playListHtml, groupIndex).then(function (episodes) {
                 playerInfo.episodes = episodes.episodesName;
                 episodesHref = episodes.episodesHref;
-                return data;
+                return movie;
             })
-        }).then(function (data) {
-            return resourceUtil['getPlayerSetting' + victimName](data, groupIndex, episodeIndex).then(function (playerSetting) {
+        }).then(function (movie) {
+            /*return resourceUtil['getPlayerSetting' + victimName](data, groupIndex, episodeIndex).then(function (playerSetting) {
+                playerInfo.playerSetting = playerSetting;
+                return playerInfo;
+            });*/
+        	
+        	return resourceUtil.getPlayerPlayerSettingBySocket(movie.victims[0].movieHref).then(function (playerSetting) {
                 playerInfo.playerSetting = playerSetting;
                 return playerInfo;
             });

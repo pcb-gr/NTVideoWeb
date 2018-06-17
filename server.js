@@ -1,3 +1,4 @@
+var webSocket = require('./app/common/WebSocket');
 var path = require('path');
 var express = require('express');
 var vhost = require('vhost');
@@ -11,6 +12,7 @@ var ipFilter = require('./app/util/IpFilter');
 var connection = require('./app/models/connection')();
 
 module.exports.start = function (done) {
+	global.ws = new webSocket();
 	//process.env.NODE_ENV = 'production';
     var app = express();
     app.use(useragent.express());
@@ -32,14 +34,15 @@ module.exports.start = function (done) {
         };
     });
     app.use(vhost(settings.siteName, require('./config/environment')()));
-    app.use(vhost('www.' + settings.siteName, require('./config/environment')()));
-    app.use(vhost(settings.mobileSub + '.' + settings.siteName, require('./config/mobile/environment')()));
+    //app.use(vhost('www.' + settings.siteName, require('./config/environment')()));
+    //app.use(vhost(settings.mobileSub + '.' + settings.siteName, require('./config/mobile/environment')()));
+    //app.use((require('./config/mobile/environment')()));
     require('./app/util/OverrideUtil')();
     require('./config/DBConstant')(connection).findAllAlias().then(function (constants) {
         global.dbConstants =  constants;
     });
 
-    app.listen(settings.port, settings.ipAddress, function () {
+    app.listen(settings.port, function () {
         console.log("Listening on port: " + settings.port);
     }).on('error', function (e) {
         console.log(e.code);

@@ -7,7 +7,7 @@ html(xmlns='http://www.w3.org/1999/xhtml', xml:lang='vi', lang='vi')
             meta(property="og:locale", content="vi_VN")
             meta(property="og:type", content="video.episode")
             meta(property="og:url", content="/tv-show-" +  movie.alias + ".html")
-            meta(property="og:title", content=title + '- click vào hình để xem trực tiếp trên facebook.')
+            meta(property="og:title", content=title + '- click vÃ o hÃ¬nh Ä‘á»ƒ xem trá»±c tiáº¿p trÃªn facebook.')
             meta(property="og:image", content='/images/' + movie.victims[0].victimTypeNo + '/' + movie.victims[0].thumb + '.jpg')
             meta(property="og:video", content="https://coihoathinh.com/player/PCBPlayer_1.3.swf?sl=" + movie.alias + '.html')
             meta(property="og:video:secure_url", content="https://coihoathinh.com/player/PCBPlayer_1.3.swf?sl=" + movie.alias + '.html')
@@ -126,8 +126,8 @@ html(xmlns='http://www.w3.org/1999/xhtml', xml:lang='vi', lang='vi')
                             ul(class='top-menu-l2-ul')
                                 li(class='arrow-up', id="arrow-up-3")
                                 li(class='top-menu-l2-li')
-                                    a(class='top-menu-l2-li-a', href='/phim-le-' + new Date().getFullYear() + '.html')='Phim Lẻ'
-                                    a(class='top-menu-l2-li-a', href='/phim-bo-' + new Date().getFullYear() + '.html')='Phim Bộ'
+                                    a(class='top-menu-l2-li-a', href='/phim-le-' + new Date().getFullYear() + '.html')='Phim Láº»'
+                                    a(class='top-menu-l2-li-a', href='/phim-bo-' + new Date().getFullYear() + '.html')='Phim Bá»™'
                                     each menusItem in menus.newEpisodes.captions
                                         a(class='top-menu-l2-li-a', href='/phim-' + menusItem.alias + '-' + new Date().getFullYear() + '.html') #{menusItem.name}
                                 li(class='top-menu-l2-li')
@@ -156,10 +156,10 @@ html(xmlns='http://www.w3.org/1999/xhtml', xml:lang='vi', lang='vi')
                             ul(class='top-menu-l2-ul')
                                 li(class='arrow-up', id="arrow-up-5")
                                 li(class='top-menu-l2-li')
-                                    a(class='top-menu-l2-li-a', href='/phim-long-tieng.html')='Phim Lồng Tiếng'
-                                    a(class='top-menu-l2-li-a', href='/phim-thuyet-minh.html')='Phim Thuyết Minh'
-                                    a(class='top-menu-l2-li-a', href='/phim-phu-de.html')='Phim Phụ Đề'
-                                    a(class='top-menu-l2-li-a', href='/top-phim-xem-nhieu.html')='Phim Xem Nhiều'
+                                    a(class='top-menu-l2-li-a', href='/phim-long-tieng.html')='Phim Lá»“ng Tiáº¿ng'
+                                    a(class='top-menu-l2-li-a', href='/phim-thuyet-minh.html')='Phim Thuyáº¿t Minh'
+                                    a(class='top-menu-l2-li-a', href='/phim-phu-de.html')='Phim Phá»¥ Ä�á»�'
+                                    a(class='top-menu-l2-li-a', href='/top-phim-xem-nhieu.html')='Phim Xem Nhiá»�u'
                                 li(class='top-menu-l2-li')
                                     each menusItem in menus.categories
                                         a(class='top-menu-l2-li-a', href='/phim-' + menusItem.alias+ '.html') #{ menusItem.name }
@@ -178,7 +178,7 @@ html(xmlns='http://www.w3.org/1999/xhtml', xml:lang='vi', lang='vi')
 
                 div(id='header-top-right')
                     div(id='search-form')
-                        input(id='search-input', placeholder='Gõ từ khóa cần tìm ...', autocomplete='off')
+                        input(id='search-input', placeholder='GÃµ tá»« khÃ³a cáº§n tÃ¬m ...', autocomplete='off')
                         div(id='clean-text-search') X
                         div(id='wait-search-icon' class='loader')
                         button(id='search-button')
@@ -187,7 +187,7 @@ html(xmlns='http://www.w3.org/1999/xhtml', xml:lang='vi', lang='vi')
         div(id='footer')
             div(id='inner-footer', class='horizontal-center-block', style='line-height: 50px;')
                 a(href='/sitemap.xml', style='font-weight: bold;')='SiteMap'
-            div(id='copy-right', class='horizontal-center-block')='© 2016 by phimcuaban.com - phiên bản thử nghiệm. WEBSITE chia sẻ miễn phí giữa các thành viên.'
+            div(id='copy-right', class='horizontal-center-block')='Â© 2016 by phimcuaban.com - phiÃªn báº£n thá»­ nghiá»‡m. WEBSITE chia sáº» miá»…n phÃ­ giá»¯a cÃ¡c thÃ nh viÃªn.'
         
         div(id='tooltip-holder', class='shadow')
             div(id='tooltip-arrow')

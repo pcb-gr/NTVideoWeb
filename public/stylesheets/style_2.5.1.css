@@ -1386,6 +1386,7 @@ div[id*='-selected-holder'] div label {
     cursor: pointer;
 }
 .pre-view-holder {
+	display: none;/*  Uncomment to display preview video */
     background: #000000;
     padding: 10px;
     margin-bottom: 10px;

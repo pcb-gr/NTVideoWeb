@@ -321,7 +321,7 @@ function initEvent() {
 var Controls = {
     videoIframe: Common.createElement('iframe', 'video-iframe'),
     video: initPCBPlayer(),
-    logo: initLogo('phimcuaban.com'),
+    logo: initLogo('Phim của Hồng Vô Đối. :))'),
     errorMessage: Common.createElement('div', 'error-message'),
     waiting: initWaiting(),
     title: {
@@ -904,7 +904,8 @@ function getCurrentGroup(){
 }
 
 function getQualities(){
-    return movieInfo.playerSetting.qualities[currentSourceIndex];
+	var q = movieInfo.playerSetting.qualities[currentSourceIndex];
+    return  q;
 }
 
 function getCurrentQuality(){
@@ -923,8 +924,9 @@ function seterrorMessage(msg) {
 
 
 function getVideoUrl(callback) {
-    showWaiting();
-    callback(getCurrentQuality().file);
+    //showWaiting();
+	var q = getCurrentQuality();
+    callback(q.file);
 }
 
 function loadNewVideo(paramVideoUrl, videoType) {

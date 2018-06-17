@@ -147,11 +147,11 @@ $(document).ready(function () {
     }
 
     function preViewVideo (movieLink, preViewVideoHolder) {
-        preViewVideoHolder.append('<div class="loader" id="video-loading"></div><p>Xin chờ chút, đang tải phim !!! Bạn có thể xem trước tại đây. Chúc bạn xem phim vui vẻ.</p>');
+       /* preViewVideoHolder.append('<div class="loader" id="video-loading"></div><p>Xin chờ chút, đang tải phim !!! Bạn có thể xem trước tại đây. Chúc bạn xem phim vui vẻ.</p>');
         qualityIndexBk = 1;
         getPreviewVideoInfoByKey(movieLink, function(videoInfo) {
             playMoviePreView(getVideoUrlPreView(videoInfo), videoInfo, preViewVideoHolder);
-        })
+        })*/
     }
 
     function getVideoUrlPreView(videoInfo) {
