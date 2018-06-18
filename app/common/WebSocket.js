@@ -1,36 +1,32 @@
 var WebSocketModule = require('ws');
-var uuid = require("node-uuid");
 var WebSocketServer = WebSocketModule.Server;
 
 var WebSocket = {
-	connection: null,
-    constructor: function(port) {
+    connection: null,
+    constructor: function (port, callback, onConnection, onClose) {
         var self = this;
         self.wss = new WebSocketServer({port: port});
         console.log('WebSocketServer listening on port %j', port);
-        self.wss.on('connection', (conn) => {
-        	
-        	WebSocket.connection = conn; 
+        callback();
+        self.wss.on('connection', function (conn) {
+            WebSocket.connection = conn;
             console.log('From port[%s]. Client is connected', port);
-
-            conn.on('close', ()=> {
-            	global.ws = new webSocket();
-                console.log('From port[%s]. Client is deleted', port);
-            });
-
+            onConnection(WebSocket);
         });
 
+        self.wss.on('close', function () {
+            onClose();
+        });
     },
-    broadcast: function(message) {
+    broadcast: function (message) {
         try {
-        	WebSocket.connection.send(JSON.stringify(message));
+            WebSocket.connection.send(JSON.stringify(message));
         } catch (e) {
             console.log(e.message)
         }
     }
 }
 
-module.exports = function(port=82) {
-	WebSocket.constructor(port);
-    return WebSocket;
+module.exports = function (port, callback, onConnection, onClose) {
+    WebSocket.constructor(port, callback, onConnection, onClose);
 }

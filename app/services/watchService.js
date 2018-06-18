@@ -82,11 +82,11 @@ var watchService = {
                 playerInfo.playerSetting = playerSetting;
                 return playerInfo;
             });*/
-        	
-        	return resourceUtil.getPlayerPlayerSettingBySocket(movie.victims[0].movieHref).then(function (playerSetting) {
+            return playerInfo;
+        	/*return resourceUtil.getPlayerPlayerSettingBySocket(movie.victims[0].movieHref).then(function (playerSetting) {
                 playerInfo.playerSetting = playerSetting;
                 return playerInfo;
-            });
+            });*/
         })
     },
     findQualitiesFromGoogleDrive: function (driveDocId) {

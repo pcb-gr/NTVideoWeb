@@ -1,8 +1,8 @@
 var settings = {
-    port: (process.env.NODE_ENV == 'production') ? process.env.OPENSHIFT_NODEJS_PORT : 80,
+    port: (process.env.NODE_ENV == 'production') ? process.env.OPENSHIFT_NODEJS_PORT : 81,
     ipAddress: (process.env.NODE_ENV == 'production') ? process.env.OPENSHIFT_NODEJS_IP : "0.0.0.0",
     //siteName: 'phimcuaban.com',
-    siteName: '171.252.129.244',
+    siteName: 'localhost',
     mobileSub: 'm',
    /* database: {
         protocol: "mysql",

@@ -12,7 +12,17 @@ var ipFilter = require('./app/util/IpFilter');
 var connection = require('./app/models/connection')();
 
 module.exports.start = function (done) {
-	global.ws = new webSocket();
+	new webSocket('90', function() {
+
+    }, function (ws) {
+        global.ws = ws;
+    }, function (ws) {
+        global.ws = null;
+        console.log('Socket global is deleted.');
+    });
+
+
+
 	//process.env.NODE_ENV = 'production';
     var app = express();
     app.use(useragent.express());
