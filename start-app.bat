@@ -12,6 +12,9 @@ echo.&pause&goto:eof
 
 :DO_TASK
 	
+	call:CHECK_STATUS_REDIS_SERVER
+	call:CHECK_STATUS_NODE_WEB_SERVER
+	
 	if %REDIS_STATUS% == STOPPED (
 		echo Checking redis server ....
 		echo Redis server is stopped.
@@ -21,7 +24,6 @@ echo.&pause&goto:eof
 	)
 	if %REDIS_STATUS% == STARTING (
 		echo Redis server is starting.
-		call:CHECK_STATUS_REDIS_SERVER
 	)
 	if %REDIS_STATUS% == STARTED  (
 		echo Redis server is started.
@@ -40,7 +42,6 @@ echo.&pause&goto:eof
 		
 		if %NODE_SERVER_STATUS% == STARTING ( 
 			echo Web server is starting.
-			call:CHECK_STATUS_NODE_WEB_SERVER
 		) 
 		
 		if %NODE_SERVER_STATUS% == STARTED (
@@ -62,7 +63,9 @@ goto:eof
 	for /f "tokens=1-2,14" %%i in ('netstat -an ^| find "0.0.0.0:%REDIS_SERVER_PORT%"') do (
 		if "%%j" == "0.0.0.0:%REDIS_SERVER_PORT%" (
 			set REDIS_STATUS=STARTED
-		) 
+		) else (
+			set REDIS_STATUS=STOPPED
+		)
 	)	
 goto:eof
 
@@ -82,6 +85,8 @@ goto:eof
 	for /f "tokens=1-2,14" %%i in ('netstat -an ^| find "0.0.0.0:%NODE_SERVER_PORT%"') do (
 		if "%%j" == "0.0.0.0:%NODE_SERVER_PORT%" (
 			set NODE_SERVER_STATUS=STARTED
+		) else (
+			set NODE_SERVER_STATUS=STOPPED
 		) 
 	)	
 goto:eof
